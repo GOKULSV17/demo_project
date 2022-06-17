@@ -1,0 +1,59 @@
+<div class="container ">
+    <div class="row justify-content-center">
+      <div class="w-50 mt-3 justify-content-center ">
+        <!-- first form -->
+        <div>
+          <form >
+            <div >
+              <h1 class="text-center" i18n="Title | Title for the first section@@titleOfFirstSection"><b>Get a life
+                  insurance quote</b></h1>
+              <p class="text-center mx-5"
+                i18n="Purpose of details | The using purpose of the data that can be used in this section@@descriptionOfFirstSection">
+                We'll use your details to send you a link to your quote and will call you when
+                you accept the quote</p>
+            </div>
+            <!-- first card -->
+            <div >
+              <mat-card>
+                <mat-card-content>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label i18n="Name filed | Name for the form sectil@@nameFiled">Name</mat-label>
+                      <input type="text" id="name" matInput [value]="userData[0]">
+                    </mat-form-field>
+                   
+  
+                  </div>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Cell Phone Number</mat-label>
+                      <input type="text" matInput [value]="userData[1]">
+                    </mat-form-field>
+                   
+                  </div>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label>E-mail</mat-label>
+                      <input type="email" matInput [value]="userData[2]">
+                    </mat-form-field>
+                   
+                  </div>
+                  <div class="row text-center">
+                    <small class="mt-5">By submitting this form, you agree to project's </small>
+                  </div>
+  
+                </mat-card-content>
+                <mat-card-actions>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill">Continue</button>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  

@@ -1,0 +1,30 @@
+
+<!-- <p >{{title}}</p> -->
+
+<div class="section">
+  <div class="container">
+    <mat-horizontal-stepper >
+      <ng-template matStepperIcon="edit">
+        <mat-icon>done</mat-icon>
+      </ng-template>
+      <mat-step label="Life insured" >
+        <app-life-insured></app-life-insured>
+      </mat-step>
+      <mat-step label="Type of cover">
+        <app-type-of-cover></app-type-of-cover>
+        <div class="text-center mt-4">
+          <a href="#" class="link-dark" mat-button matStepperPrevious>Back</a>
+        </div>
+      </mat-step>
+      <mat-step label="Quote">
+        <app-quote></app-quote>
+        <div class="text-center mt-4">
+          <a href="#" class="link-dark" mat-button matStepperPrevious>Back</a>
+        </div>
+      </mat-step>
+      <mat-step label="Request a call back">
+        <app-request-call></app-request-call>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<form >
+  <div>
+    <small *ngIf="coverValue=='both'">For me</small>
+    <input *ngIf="!lifeCover" type="checkbox" >
+    <label *ngIf="!lifeCover" class="px-3" for="vehicle1">LifeCover</label><br>
+    <input *ngIf="!disabilityCover" type="checkbox" >
+    <label *ngIf="!disabilityCover" class="px-3" for="vehicle2">Disability Cover</label><br>
+    <input *ngIf="!incomeProtectionCover" type="checkbox" >
+    <label *ngIf="!incomeProtectionCover" class="px-3" for="vehicle3">Income Protection Cover</label><br>
+    <input *ngIf="!criticalIllnessCover" type="checkbox" >
+    <label *ngIf="!criticalIllnessCover" class="px-3" for="vehicle3">Critical Illness Cover</label><br>
+  </div>
+  <div *ngIf="coverValue=='both'">
+    <small>For Partner</small><br>
+    <input *ngIf="!p_lifeCover" type="checkbox" value="lifeCover">
+    <label *ngIf="!p_lifeCover" class="px-3" for="vehicle1">LifeCover</label><br>
+    <input *ngIf="!p_disabilityCover" type="checkbox" value="disabilityCover">
+    <label *ngIf="!p_disabilityCover" class="px-3" for="vehicle2">Disability Cover</label><br>
+    <input *ngIf="!p_incomeProtectionCover" type="checkbox" value="incomeProtectionCover">
+    <label *ngIf="!p_incomeProtectionCover" class="px-3" for="vehicle3">Income Protection Cover</label><br>
+    <input *ngIf="!p_criticalIllnessCover" type="checkbox" value="criticalIllnessCover">
+    <label *ngIf="!p_criticalIllnessCover" class="px-3" for="vehicle3">Critical Illness Cover</label><br>
+  </div>
+  <div>
+    <button class="btn" >ADD</button>
+  </div>
+</form>

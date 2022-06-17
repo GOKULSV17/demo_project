@@ -1,0 +1,34 @@
+/* .container {
+    position: relative;
+    width: auto;
+    height: 100px;
+    float: left;
+    margin-left: 10px;
+  } */
+  
+  .checkbox {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    /* border-radius: 50%; */
+    
+  }
+
+
+ 
+  mat-button-toggle {
+    /* border: 1px solid #f28628;  */
+    border-radius: 4px;
+    /* margin-left: 3px; */
+    margin-right:3px;
+    width: 300px;
+    height: 50px;
+    font-family: 'Nunito Semibold', sans-serif;
+    font-size: 14px;
+    font-style: bold;
+}
+
+.mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
