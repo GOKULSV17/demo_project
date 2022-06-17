@@ -97,19 +97,13 @@
                   <div *ngIf="continueStatus && f.DOB.errors">
                     <mat-error *ngIf="f.DOB.errors.required">Date of Birth requried</mat-error>
                   </div>
-                  <!-- <div *ngIf="continueStatus && f.p_DOB.errors">
-                    <mat-error *ngIf="f.p_DOB.errors.required">Partners Date of Birth requried</mat-error>
-                  </div> -->
+                  
                 </div>
               </mat-card-content>
               <mat-card-actions class="m-5">
                 <div class="text-center">
                   <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="userData.controls['DOB'].invalid ? [retrun, continueStatus=true]: [steps=5]"
-                    >Continue</button>
-                    <!-- <button type="submit" *ngIf="coverFor==2" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="userData.controls['p_DOB'].invalid ? [retrun, continueStatus=true]: [steps=5]"
-                    >Continue</button> -->
+                    (click)="userData.controls['DOB'].invalid ? [retrun, continueStatus=true]: [steps=5]">Continue</button>
                 </div>
               </mat-card-actions>
             </mat-card>
@@ -212,8 +206,8 @@
             <label for="" class="display-4 text-center fw-bold">You're almost there</label>
             <p class="text-center">Just a few more steps to go</p>
             <div class="text-center">
-              <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill" matStepperNext (click)="firstSection()"
-                >Continue</button>
+              <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill" matStepperNext
+                (click)="firstSection()">Continue</button>
             </div>
           </div>
         </form>

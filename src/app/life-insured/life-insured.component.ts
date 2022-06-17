@@ -29,16 +29,14 @@ export class LifeInsuredComponent implements OnInit {
     p_income: ['', Validators.required],
     p_tobacouse: ['Na'],
   })
-
+  
   continueStatus: boolean = false;
   steps: any = 1;
   coverFor: any = 1;
   partnersText: string = '';
   occupations: any = (occupation as any).default;
+  
   constructor(private fb: FormBuilder, private coverDataS: CoverDataService, private http: HttpClient) { }
-  ngOnInit(): void {
-
-  }
 
   get f() {
     return this.userData.controls;
@@ -54,7 +52,6 @@ export class LifeInsuredComponent implements OnInit {
     console.log(this.steps)
   }
 
-
   fTobacco(tobacouse: boolean) {
     if (this.userData.controls['cover'].value == 'both' && this.coverFor != 2 || this.userData.controls['p_gender'].value == ' ') {
       this.userData.controls['tobacouse'].setValue(tobacouse)
@@ -66,5 +63,4 @@ export class LifeInsuredComponent implements OnInit {
       this.steps = 9
     }
   }
-
 }
