@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import{CoverDataService} from '../services/cover-data.service'
+import { MatStepper } from '@angular/material/stepper';
+import { CoverDataService } from '../services/cover-data.service'
 
 @Component({
   selector: 'app-type-of-cover',
@@ -9,28 +10,38 @@ import{CoverDataService} from '../services/cover-data.service'
 })
 export class TypeOfCoverComponent implements OnInit {
   form: FormGroup;
+  coverOption: string | undefined;
+  public toDisplay_partner = false;
+  public toDisplay_myself = true;
+  typeOfCover:boolean=false;
   coverName: Array<any> = [
     { name: 'LifeCover', value: 'LifeCover' },
     { name: 'DisabilityCover', value: 'DisabilityCover' },
     { name: 'IncomeProtectionCover', value: 'IncomeProtectionCover' },
     { name: 'CriticalIllnessCover', value: 'CriticalIllnessCover' }
   ];
-constructor(private coverDataS:CoverDataService, private fb:FormBuilder) { 
-  this.form = this.fb.group({
-    self: this.fb.array([], [Validators.required]),
-    partner: this.fb.array([], [Validators.required])
-    })   
-}
-cover=1;
-coverOption:string |undefined;
-toDisplay_partner=false;
-toDisplay_myself=true;
-  ngOnInit(): void {
-    this.coverDataS.coverData.subscribe(data =>{
-      this.coverOption=data
+  /**
+   * creating the form group to store the value of the self & partner
+   */
+  constructor(private coverDataS: CoverDataService, private fb: FormBuilder, private stepper: MatStepper) {
+    this.form = this.fb.group({
+      self: this.fb.array([], [Validators.required]),
+      partner: this.fb.array([], [Validators.required])
     })
   }
-  onCbChangeSelf(event : any) {
+  /**
+   * resive the data of the cover value 
+   */
+  ngOnInit(): void {
+    this.coverDataS.coverData.subscribe(data => {
+      this.coverOption = data
+    })
+  }
+  /**
+   * store the data of cover for self
+   * @param event get the check box clicked data of self cover
+   */
+  checkBoxForSelf(event: any) {
     const self: FormArray = this.form.get('self') as FormArray;
     if (event.target.checked) {
       self.push(new FormControl(event.target.value));
@@ -45,7 +56,11 @@ toDisplay_myself=true;
       });
     }
   }
-  onCbChangePartner(event : any) {
+  /**
+   * store the data of cover for partner
+   * @param event get the check box clicked data of partner cover
+   */
+  checkBoxForPartner(event: any) {
     const partner: FormArray = this.form.get('partner') as FormArray;
     if (event.target.checked) {
       partner.push(new FormControl(event.target.value));
@@ -60,18 +75,19 @@ toDisplay_myself=true;
       });
     }
   }
-  nextSection(){
+  /**
+   * @retrun send the selected data for cover to the next stepper 
+   */
+  nextSection() {
     this.coverDataS.sendCoverArraySelf(this.form.value['self'])
     this.coverDataS.sendCoverArrayPartner(this.form.value['partner'])
-  }
-  partner() {
-    this.toDisplay_partner = true
-    this.toDisplay_myself= false;
-  }
-  myself(){
-    this.toDisplay_myself=true;
-    this.toDisplay_partner=false
-    this.cover=2
-  }
+    this.coverDataS.typeOfCoverStatus(this.typeOfCover=true)
   
+  }
+  /**
+   * go to the previious stepper section
+   */
+  goBack() {
+    this.stepper.previous();
+  }
 }

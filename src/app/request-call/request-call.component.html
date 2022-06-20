@@ -3,7 +3,7 @@
       <div class="w-50 mt-3 justify-content-center ">
         <!-- first form -->
         <div>
-          <form >
+          <form [formGroup]="userDatas" >
             <div >
               <h1 class="text-center" i18n="Title | Title for the first section@@titleOfFirstSection"><b>Get a life
                   insurance quote</b></h1>
@@ -19,24 +19,34 @@
                   <div class="row">
                     <mat-form-field appearance="fill">
                       <mat-label i18n="Name filed | Name for the form sectil@@nameFiled">Name</mat-label>
-                      <input type="text" id="name" matInput [value]="userData[0]">
+                      <input type="text" id="name" matInput  [(ngModel)]="name" formControlName="name" >
                     </mat-form-field>
-                   
-  
+                    <div *ngIf="continueStatus && LifeInsurance.name.errors">
+                      <mat-error *ngIf="LifeInsurance.name.errors.required" class="text-danger">Name is required</mat-error>
+                      <mat-error *ngIf="LifeInsurance.name.errors.minlength">Minimum 3 character requried</mat-error>
+                      <mat-error *ngIf="LifeInsurance.name.errors.maxlength">Maximum 10 character requried</mat-error>
+                    </div>
                   </div>
                   <div class="row">
                     <mat-form-field appearance="fill">
                       <mat-label>Cell Phone Number</mat-label>
-                      <input type="text" matInput [value]="userData[1]">
+                      <input type="text" matInput [(ngModel)]="phoneNumber" formControlName="phoneNumber" >
                     </mat-form-field>
-                   
+                    <div *ngIf="continueStatus && LifeInsurance.phoneNumber.errors">
+                      <mat-error *ngIf="LifeInsurance.phoneNumber.errors.required" class="text-danger">Phone Number is required
+                      </mat-error>
+                      <mat-error *ngIf="LifeInsurance.phoneNumber.errors.minlength">Maximum 10 character requried</mat-error>
+                    </div>
                   </div>
                   <div class="row">
                     <mat-form-field appearance="fill">
                       <mat-label>E-mail</mat-label>
-                      <input type="email" matInput [value]="userData[2]">
+                      <input type="email" matInput [(ngModel)]="email" formControlName="email">
                     </mat-form-field>
-                   
+                    <div *ngIf="continueStatus && LifeInsurance.email.errors">
+                      <mat-error *ngIf="LifeInsurance.email.errors.required" class="text-danger">Email is required</mat-error>
+                      <mat-error *ngIf="LifeInsurance.email.errors.email" class="text-danger">Email is invalid</mat-error>
+                    </div>
                   </div>
                   <div class="row text-center">
                     <small class="mt-5">By submitting this form, you agree to project's </small>
@@ -45,12 +55,16 @@
                 </mat-card-content>
                 <mat-card-actions>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill">Continue</button>
+                    <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
+                    (click)="final()">Continue</button>
                   </div>
                 </mat-card-actions>
               </mat-card>
             </div>
           </form>
+        </div>
+        <div class="text-center mt-4">
+          <a href="#" class="link-dark" mat-button (click)="goBack()">Back</a>
         </div>
       </div>
   

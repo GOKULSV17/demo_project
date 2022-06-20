@@ -21,7 +21,8 @@
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
-                    <a *ngIf="lifeCover==false" class="px-3 mt-2" (click)="[Add('LifeCover'),lifeCover=true,lifeCoverValue=10000]">
+                    <a *ngIf="lifeCover==false" class="px-3 mt-2"
+                      (click)="[Add('LifeCover'),lifeCover=true,lifeCoverValue=10000]">
                       <h5> Add<mat-icon class="mat-icon">add</mat-icon>
                       </h5>
                     </a>
@@ -54,11 +55,13 @@
                   <div class="lefttop">
                     <small class="px-2 pt-2">Partner</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="p_lifeCover && coverArrayPartner!=1" (click)="[Remove('LifeCover'),p_lifeCover=false,p_lifeCoverValue=0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="p_lifeCover && coverArrayPartner!=1"
+                      (click)="[Remove('LifeCover'),p_lifeCover=false,p_lifeCoverValue=0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
-                    <a *ngIf="p_lifeCover==false" class="px-3 mt-2" (click)="[Add('LifeCover'),p_lifeCover=true,p_lifeCoverValue=10000]">
+                    <a *ngIf="p_lifeCover==false" class="px-3 mt-2"
+                      (click)="[Add('LifeCover'),p_lifeCover=true,p_lifeCoverValue=10000]">
                       <h5> Add<mat-icon class="mat-icon">add</mat-icon>
                       </h5>
                     </a>
@@ -95,11 +98,13 @@
                   <div class="lefttop" *ngIf="coverValue=='both'">
                     <small class="px-2 pt-2">Myself</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="disabilityCover && coverArraySelf.length !=1" (click)="[Remove('DisabilityCover'),disabilityCover=false,disabilityCovervalue = 0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="disabilityCover && coverArraySelf.length !=1"
+                      (click)="[Remove('DisabilityCover'),disabilityCover=false,disabilityCovervalue = 0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
-                    <a href="#" class="px-3 mt-2" *ngIf="disabilityCover==false" (click)="[Add('DisabilityCover'),disabilityCover=true,disabilityCovervalue = 30000]">
+                    <a href="#" class="px-3 mt-2" *ngIf="disabilityCover==false"
+                      (click)="[Add('DisabilityCover'),disabilityCover=true,disabilityCovervalue = 30000]">
                       <h5>Add<mat-icon class="mat-icon">add</mat-icon>
                       </h5>
                     </a>
@@ -133,11 +138,13 @@
                   <div class="lefttop">
                     <small class="px-2 pt-2">Partner</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="p_disabilityCover && coverArraySelf.length !=1" (click)="[Remove('DisabilityCover'),p_disabilityCover=false,p_disabilityCovervalue = 0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="p_disabilityCover && coverArraySelf.length !=1"
+                      (click)="[Remove('DisabilityCover'),p_disabilityCover=false,p_disabilityCovervalue = 0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
-                    <a href="#" class="px-3 mt-2" *ngIf="p_disabilityCover==false" (click)="[Add('DisabilityCover'),p_disabilityCover=true,p_disabilityCovervalue = 30000]">
+                    <a href="#" class="px-3 mt-2" *ngIf="p_disabilityCover==false"
+                      (click)="[Add('DisabilityCover'),p_disabilityCover=true,p_disabilityCovervalue = 30000]">
                       <h5>Add<mat-icon class="mat-icon">add</mat-icon>
                       </h5>
                     </a>
@@ -172,7 +179,8 @@
                   <div class="lefttop" *ngIf="coverValue=='both'">
                     <small class="px-2 pt-2">Myself</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="incomeProtectionCover && coverArraySelf.length !=1" (click)="[Remove('IncomeProtectionCover'),incomeProtectionCover=false,incomeProtectionCoverValue = 0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="incomeProtectionCover && coverArraySelf.length !=1"
+                      (click)="[Remove('IncomeProtectionCover'),incomeProtectionCover=false,incomeProtectionCoverValue = 0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
@@ -186,7 +194,7 @@
                     <div class="text-center">
                       <h1 class="text-center pt-2 h1">{{incomeProtectionCoverValue/60 |currency1}}</h1>
                       <mat-hint>Per Month</mat-hint>
-                      <h1 class="text-center pt-3 h3">{{incomeProtectionCoverValue}}</h1>
+                      <h1 class="text-center pt-3 h3">{{incomeProtectionCoverValue |currency1}}</h1>
                       <mat-hint>CoverAmount</mat-hint>
                     </div>
                     <mat-slider class="pt-2 w-100" [disabled]="disabled" [invert]="invert"
@@ -214,7 +222,8 @@
                   <div class="lefttop">
                     <small class="px-2 pt-2">Partner</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="p_incomeProtectionCover&& coverArraySelf.length !=1" (click)="[Remove('IncomeProtectionCover'),p_incomeProtectionCover=false,p_incomeProtectionCoverValue = 0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="p_incomeProtectionCover&& coverArraySelf.length !=1"
+                      (click)="[Remove('IncomeProtectionCover'),p_incomeProtectionCover=false,p_incomeProtectionCoverValue = 0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
@@ -256,7 +265,8 @@
                   <div class="lefttop" *ngIf="coverValue=='both'">
                     <small class="px-2 pt-2">Myself</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="criticalIllnessCover && coverArraySelf.length !=1" (click)="[Remove('CriticalIllnessCover'),criticalIllnessCover=false,criticalIllnessCoverValue=0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="criticalIllnessCover && coverArraySelf.length !=1"
+                      (click)="[Remove('CriticalIllnessCover'),criticalIllnessCover=false,criticalIllnessCoverValue=0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
@@ -264,7 +274,7 @@
                       (click)="[Add('CriticalIllnessCover'),criticalIllnessCover=true,criticalIllnessCoverValue = 50000]">
                       <h5>Add<mat-icon class="mat-icon">add</mat-icon>
                       </h5>
-                    </a>
+                    </a>  
                   </div>
                   <div *ngIf="criticalIllnessCover">
                     <div class="text-center">
@@ -298,20 +308,22 @@
                   <div class="lefttop">
                     <small class="px-2 pt-2">Partner</small>
                     <small class="fill"></small>
-                    <a href="#" class="px-3 mt-2" *ngIf="p_criticalIllnessCover&& coverArraySelf.length !=1" (click)="[Remove('CriticalIllnessCover'),p_criticalIllnessCover=false,p_criticalIllnessCoverValue=0]">
+                    <a href="#" class="px-3 mt-2" *ngIf="p_criticalIllnessCover&& coverArraySelf.length !=1"
+                      (click)="[Remove('CriticalIllnessCover'),p_criticalIllnessCover=false,p_criticalIllnessCoverValue=0]">
                       <h5>Remove<mat-icon class="mat-icon">remove_circle_outline</mat-icon>
                       </h5>
                     </a>
                     <a href="#" class="px-3 mt-2" *ngIf="p_criticalIllnessCover==false"
                       (click)="[Add('CriticalIllnessCover'),p_criticalIllnessCover=true,p_criticalIllnessCoverValue = 50000]">
-                      <h5>Add<mat-icon class="mat-icon">add</mat-icon></h5>
+                      <h5>Add<mat-icon class="mat-icon">add</mat-icon>
+                      </h5>
                     </a>
                   </div>
                   <div *ngIf="p_criticalIllnessCover">
                     <div class="text-center">
                       <h1 class="text-center pt-2 h1">R{{p_criticalIllnessCoverValue/60 | currency1}}</h1>
                       <mat-hint>Per Month</mat-hint>
-                      <h1 class="text-center pt-3 h3">R{{p_criticalIllnessCoverValue}} | currency1</h1>
+                      <h1 class="text-center pt-3 h3">R{{p_criticalIllnessCoverValue | currency1}}</h1>
                       <mat-hint>CoverAmount</mat-hint>
                     </div>
                     <mat-slider class="pt-2 w-100" [disabled]="disabled" [invert]="invert"
@@ -321,7 +333,7 @@
                       aria-labelledby="example-name-label">
                     </mat-slider>
                     <div class="row">
-                      <mat-hint class="col">Min:{{p_criticalIllnessCovermin | currency1}}</mat-hint>
+                      <mat-hint class="col">Min:{{p_criticalIllnessCoverMin | currency1}}</mat-hint>
                       <mat-hint class="offset-4 col">Max:{{p_criticalIllnessCoverMax | currency1}}</mat-hint>
                     </div>
                   </div>
@@ -339,10 +351,12 @@
                 <mat-card-content class="bg-light rounded-circle">
                   <div class="text-center p-5 ">
                     <h1 class="text-center h1" *ngIf="coverValue!='both'">
-                      {{(this.lifeCoverValue+this.disabilityCovervalue+this.incomeProtectionCoverValue+this.criticalIllnessCoverValue)/60 |currency1}}
+                      {{(this.lifeCoverValue+this.disabilityCovervalue+this.incomeProtectionCoverValue+this.criticalIllnessCoverValue)/60
+                      |currency1}}
                     </h1>
                     <h1 class="text-center h1" *ngIf="coverValue=='both'">
-                      {{(this.lifeCoverValue+this.disabilityCovervalue+this.incomeProtectionCoverValue+this.criticalIllnessCoverValue+this.p_lifeCoverValue+this.p_disabilityCovervalue+this.p_incomeProtectionCoverValue+this.p_criticalIllnessCoverValue)/60 |currency1}}
+                      {{(this.lifeCoverValue+this.disabilityCovervalue+this.incomeProtectionCoverValue+this.criticalIllnessCoverValue+this.p_lifeCoverValue+this.p_disabilityCovervalue+this.p_incomeProtectionCoverValue+this.p_criticalIllnessCoverValue)/60
+                      |currency1}}
                     </h1>
                     <mat-hint>Per Month</mat-hint>
                   </div>
@@ -355,6 +369,9 @@
             </div>
           </div>
         </form>
+      </div>
+      <div class="text-center mt-4">
+        <a href="#" class="link-dark" mat-button (click)="goBack()">Back</a>
       </div>
     </div>
   </div>

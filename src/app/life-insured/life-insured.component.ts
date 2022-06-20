@@ -10,61 +10,62 @@ import { MatStepperNext } from '@angular/material/stepper';
   templateUrl: './life-insured.component.html',
   styleUrls: ['./life-insured.component.css']
 })
-export class LifeInsuredComponent implements OnInit {
-  userData = this.fb.group({
+export class LifeInsuredComponent {
+  public userData = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
     email: ['', [Validators.required, Validators.email]],
     cover: [''],
     gender: [''],
-    DOB: ['', Validators.required],
+    DOB: ['', [Validators.required]],
     education: [''],
-    job: ['', Validators.required],
-    income: ['', Validators.required],
+    job: ['', [Validators.required]],
+    income: ['', [Validators.required]],
     tobacouse: [''],
-    p_gender: ['Na'],
-    p_DOB: ['Na', Validators.required],
-    p_education: ['Na'],
-    p_job: ['Na', Validators.required],
+    p_gender: [''],
+    p_DOB: ['', Validators.required],
+    p_education: [''],
+    p_job: ['', Validators.required],
     p_income: ['', Validators.required],
-    p_tobacouse: ['Na'],
+    p_tobacouse: [''],
   })
-
   continueStatus: boolean = false;
   steps: any = 1;
   coverFor: any = 1;
   partnersText: string = '';
   occupations: any = (occupation as any).default;
+  lifeInsered:boolean=false;
+  
   constructor(private fb: FormBuilder, private coverDataS: CoverDataService, private http: HttpClient) { }
-  ngOnInit(): void {
-
-  }
-
-  get f() {
+/**
+ * get the data to LifeInsurance
+ * @return value fro the validation
+ */
+  get LifeInsurance() {
     return this.userData.controls;
   }
-
-  firstSection() {
-    this.coverDataS.sendCoverData(this.userData.controls['cover'].value)
-    this.coverDataS.sendUserData([this.userData.controls['name'].value, this.userData.controls['phoneNumber'].value, this.userData.controls['email'].value])
-  }
-
-  back() {
-    this.steps = this.steps - 1;
-    console.log(this.steps)
-  }
-
-
-  fTobacco(tobacouse: boolean) {
+  /**
+ * check the cover stats is self/partner and chage the direction
+ * @param tobacouse get value of usage of tobacouse
+ */
+   fTobacco(tobacouse: boolean) {
     if (this.userData.controls['cover'].value == 'both' && this.coverFor != 2 || this.userData.controls['p_gender'].value == ' ') {
-      this.userData.controls['tobacouse'].setValue(tobacouse)
-      this.steps = 3;
+      this.steps = 9;
       this.coverFor = 2;
       this.partnersText = "partner's";
     } else {
-      this.userData.controls['p_tobacouse'].setValue(tobacouse)
-      this.steps = 9
+      this.steps = 15
     }
+  }
+/**
+ * send the value for the next stepper section
+ */
+  firstSection() {
+    console.log(this.userData.value)
+    this.coverDataS.lifeInsuredStatus(this.lifeInsered=true)
+    this.coverDataS.sendCoverData(this.userData.controls['cover'].value)
+    this.coverDataS.sendUserData(this.userData.value)
+   
   }
 
 }

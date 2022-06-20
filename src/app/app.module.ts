@@ -15,13 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from  '@angular/material/input'
 import{MatCheckboxModule} from '@angular/material/checkbox'
 import {MatButtonToggleModule} from '@angular/material/button-toggle'
-import {FormGroup,FormControl,Validators,FormBuilder,FormsModule, ReactiveFormsModule,} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule,} from '@angular/forms'
 import {MatIconModule} from '@angular/material/icon'
 import{MatSelectModule} from '@angular/material/select';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import{MatSliderModule} from '@angular/material/slider'
 import '@angular/common/locales/global/fr';
 import {MatDialogModule} from '@angular/material/dialog'
+// import{SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatDialogModule} from '@angular/material/dialog'
     MatIconModule,
 
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+ 
 
     
   ],
