@@ -1,7 +1,6 @@
-<div class="container ">
+<div class="container " >
   <div class="row justify-content-center">
     <div class="w-50 mt-3 justify-content-center ">
-      <!-- first form -->
       <div>
         <form [formGroup]="userData">
           <div *ngIf="steps==1">
@@ -12,7 +11,6 @@
               We'll use your details to send you a link to your quote and will call you when
               you accept the quote</p>
           </div>
-          <!-- first card -->
           <div *ngIf="steps==1">
             <mat-card>
               <mat-card-content>
@@ -21,22 +19,24 @@
                     <mat-label i18n="Name filed | Name for the form sectil@@nameFiled">Name</mat-label>
                     <input type="text" id="name" matInput formControlName="name">
                   </mat-form-field>
-                  <div *ngIf="continueStatus && f.name.errors">
-                    <mat-error *ngIf="f.name.errors.required" class="text-danger">Name is required</mat-error>
-                    <mat-error *ngIf="f.name.errors.minlength">Minimum 3 character requried</mat-error>
-                    <mat-error *ngIf="f.name.errors.maxlength">Maximum 10 character requried</mat-error>
+                  <div *ngIf="continueStatus && LifeInsurance.name.errors">
+                    <mat-error *ngIf="LifeInsurance.name.errors.required" class="text-danger">Name is required
+                    </mat-error>
+                    <mat-error *ngIf="LifeInsurance.name.errors.minlength">Minimum 3 character requried</mat-error>
+                    <mat-error *ngIf="LifeInsurance.name.errors.maxlength">Maximum 10 character requried</mat-error>
                   </div>
-
                 </div>
                 <div class="row">
                   <mat-form-field appearance="fill">
                     <mat-label>Cell Phone Number</mat-label>
                     <input type="text" matInput formControlName="phoneNumber">
                   </mat-form-field>
-                  <div *ngIf="continueStatus && f.phoneNumber.errors">
-                    <mat-error *ngIf="f.phoneNumber.errors.required" class="text-danger">Phone Number is required
+                  <div *ngIf="continueStatus && LifeInsurance.phoneNumber.errors">
+                    <mat-error *ngIf="LifeInsurance.phoneNumber.errors.required" class="text-danger">Phone Number is
+                      required
                     </mat-error>
-                    <mat-error *ngIf="f.phoneNumber.errors.minlength">Maximum 10 character requried</mat-error>
+                    <mat-error *ngIf="LifeInsurance.phoneNumber.errors.minlength">Maximum 10 character requried
+                    </mat-error>
                   </div>
                 </div>
                 <div class="row">
@@ -44,25 +44,24 @@
                     <mat-label>E-mail</mat-label>
                     <input type="email" matInput formControlName="email">
                   </mat-form-field>
-                  <div *ngIf="continueStatus && f.email.errors">
-                    <mat-error *ngIf="f.email.errors.required" class="text-danger">Email is required</mat-error>
-                    <mat-error *ngIf="f.email.errors.email" class="text-danger">Email is invalid</mat-error>
+                  <div *ngIf="continueStatus && LifeInsurance.email.errors">
+                    <mat-error *ngIf="LifeInsurance.email.errors.required" class="text-danger">Email is required
+                    </mat-error>
+                    <mat-error *ngIf="LifeInsurance.email.errors.email" class="text-danger">Email is invalid</mat-error>
                   </div>
                 </div>
                 <div class="row text-center">
                   <small class="mt-5">By submitting this form, you agree to project's </small>
                 </div>
-
               </mat-card-content>
               <mat-card-actions>
                 <div class="text-center">
                   <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="this.userData.controls['name'].invalid || this.userData.controls['email'].invalid || this.userData.controls['phoneNumber'].invalid ? [retrun,continueStatus=true] :[steps=2]">Continue</button>
+                    (click)="this.userData.controls['name'].invalid || this.userData.controls['email'].invalid || this.userData.controls['phoneNumber'].invalid ? [retrun,continueStatus=true] :[steps=2,continueStatus=false]">Continue</button>
                 </div>
               </mat-card-actions>
             </mat-card>
           </div>
-          <!-- second q  for cover-->
           <div class="w-100" *ngIf="steps==2">
             <label for="" class="display-4 text-center fw-bold">I'd like to get life insurance cover for</label>
             <div class="row mt-5">
@@ -73,65 +72,59 @@
                 partner</button>
             </div>
           </div>
-          <!-- thired q gender-->
           <div class="w-100" *ngIf="steps==3">
-            <label for="" class="display-4 text-center fw-bold">What is your {{partnersText}} gender?</label>
+            <label for="" class="display-4 text-center fw-bold">What is your gender?</label>
             <div class="row mt-5">
               <button class="px-5 py-3  w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[ this.userData.controls[coverFor != 2 ?'gender':'p_gender'].setValue('male'),steps=4]">Male</button>
+                (click)="[ this.userData.controls['gender'].setValue('male'),steps=4]">Male</button>
               <button class="px-5 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor != 2 ?'gender':'p_gender'].setValue('female') ,steps=4]">Female</button>
+                (click)="[this.userData.controls['gender'].setValue('female') ,steps=4]">Female</button>
             </div>
           </div>
-          <!-- forth q DOB -->
           <div class="w-100" *ngIf="steps==4">
-            <label for="" class="display-4 text-center fw-bold">What is your {{partnersText}} date of birth?</label>
+            <label for="" class="display-4 text-center fw-bold">What is your date of birth?</label>
             <mat-card>
               <mat-card-content>
                 <div class="row">
                   <mat-form-field appearance="fill">
                     <mat-label>Date Of Birth</mat-label>
-                    <input type="date" matInput formControlName="{{coverFor !=2 ?'DOB':'p_DOB'}}">
-                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <input type="date" matInput formControlName="DOB">
                   </mat-form-field>
-                  <div *ngIf="continueStatus && f.DOB.errors">
-                    <mat-error *ngIf="f.DOB.errors.required">Date of Birth requried</mat-error>
+                  <div *ngIf="continueStatus && LifeInsurance.DOB.errors">
+                    <mat-error *ngIf="LifeInsurance.DOB.errors.required">Date of Birth requried</mat-error>
                   </div>
-                  
                 </div>
               </mat-card-content>
               <mat-card-actions class="m-5">
                 <div class="text-center">
                   <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="userData.controls['DOB'].invalid ? [retrun, continueStatus=true]: [steps=5]">Continue</button>
+                    (click)="userData.controls['DOB'].invalid ? [retrun, continueStatus=true]: [steps=5,continueStatus=false]">Continue</button>
                 </div>
               </mat-card-actions>
             </mat-card>
           </div>
-          <!-- fivth q education -->
           <div class="w-100" *ngIf="steps==5">
-            <label for="" class="display-4 text-center fw-bold">What is your {{partnersText}} highest level of education
+            <label for="" class="display-4 text-center fw-bold">What is your highest level of education
               completed?</label>
             <div class="row mt-5">
               <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor !=2? 'education':'p_education'].setValue('No Matrix'),steps=6]">No
+                (click)="[this.userData.controls[ 'education'].setValue('No Matrix'),steps=6]">No
                 Matrix</button>
               <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor !=2? 'education':'p_education'].setValue('Matrix'),steps=6]">Matrix</button>
+                (click)="[this.userData.controls[ 'education'].setValue('Matrix'),steps=6]">Matrix</button>
               <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor !=2? 'education':'p_education'].setValue('3 Year diploma'),steps=6]">3
+                (click)="[this.userData.controls[ 'education'].setValue('3 Year diploma'),steps=6]">3
                 Year diploma</button>
               <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor !=2? 'education':'p_education'].setValue('3 year degree/4 year diploma'),steps=6]">3
+                (click)="[this.userData.controls[ 'education'].setValue('3 year degree/4 year diploma'),steps=6]">3
                 year degree/4 year diploma</button>
               <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
-                (click)="[this.userData.controls[coverFor !=2? 'education':'p_education'].setValue('4 Year degree'),steps=6]">4
+                (click)="[this.userData.controls[ 'education'].setValue('4 Year degree'),steps=6]">4
                 Year degree</button>
             </div>
           </div>
-          <!-- sixth job -->
-          <div class="w-100" *ngIf="steps==6   ">
-            <label for="" class="display-4 text-center fw-bold">What do you {{partnersText}} do for a living?</label>
+          <div class="w-100" *ngIf="steps==6">
+            <label for="" class="display-4 text-center fw-bold">What do you do for a living?</label>
             <p class="text-center mt-3">Select an occupation that matches what you currently do for a living. If you
               don't
               find an exact match, select the closest match.</p>
@@ -139,30 +132,27 @@
               <mat-card-content>
                 <div class="row">
                   <mat-form-field appearance="fill">
-                    <!-- <mat-label>Occupation</mat-label> -->
                     <mat-label>Job</mat-label>
-                    <mat-select [(ngModel)]="selectedValue" name="" formControlName="{{coverFor !=2 ?'job':'p_job'}}"
-                      matInput>
+                    <mat-select [(ngModel)]="selectedValue" name="" formControlName="job" matInput>
                       <mat-option>Select Job</mat-option>
                       <mat-option *ngFor="let occupation of occupations" [value]="occupation">
                         {{occupation}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <div *ngIf="continueStatus && f.job.errors">
-                    <mat-error *ngIf="f.job.errors.required">Job requried</mat-error>
+                  <div *ngIf="continueStatus && LifeInsurance.job.errors">
+                    <mat-error *ngIf="LifeInsurance.job.errors.required">Job requried</mat-error>
                   </div>
                 </div>
               </mat-card-content>
               <mat-card-actions class="m-5">
                 <div class="text-center">
                   <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="this.userData.controls['job'].invalid ? [retrun,continueStatus=true] : steps=7 ">Continue</button>
+                    (click)="this.userData.controls['job'].invalid ? [retrun,continueStatus=true] : [steps=7,continueStatus=false] ">Continue</button>
                 </div>
               </mat-card-actions>
             </mat-card>
           </div>
-          <!-- seventh income -->
           <div class="w-100" *ngIf="steps==7">
             <label for="" class="display-4 text-center fw-bold">What is your {{partnersText}} monthly income before tax
               and
@@ -177,32 +167,154 @@
                     <span matPrefix>R &nbsp;</span>
                     <input type="text" matInput formControlName="{{coverFor !=2 ?'income':'p_income'}}" [value]="">
                   </mat-form-field>
-                  <div *ngIf="!continueStatus && f.income.errors">
-                    <mat-error *ngIf="f.income.errors.required">Income is requried</mat-error>
+                  <div *ngIf="continueStatus && LifeInsurance.income.errors">
+                    <mat-error *ngIf="LifeInsurance.income.errors.required">Income is requried</mat-error>
                   </div>
                 </div>
               </mat-card-content>
               <mat-card-actions class="m-5">
                 <div class="text-center">
                   <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
-                    (click)="userData.controls['income'].invalid ? [retrun,continueStatus=false] : steps=8 ">Continue</button>
+                    (click)="userData.controls['income'].invalid ? [retrun,continueStatus=true] : [steps=8,continueStatus=false] ">Continue</button>
                 </div>
               </mat-card-actions>
             </mat-card>
           </div>
-          <!-- eigth q tobacco -->
           <div class="w-100" *ngIf="steps==8">
-            <label for="" class="display-4 text-center fw-bold">Did you {{partnersText}} smoke tobacco in the last 6
+            <label for="" class="display-4 text-center fw-bold">Did you smoke tobacco in the last 6
               months?</label>
             <p class="text-center mt-3">Tobacco use is defined as the use of tobacco or nicotine products in the form of
               cigarettes, cigars, pipes, snuff, chewing tobacco, e-cigarettes, vaping devices, hubbly bubbly and the
               like, within the last 6 months</p>
             <div class="row mt-5">
-              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder" (click)="fTobacco(true)">Yes</button>
-              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder" (click)="fTobacco(false)">No</button>
+              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[fTobacco(),this.userData.controls['tobacouse'].setValue(true)]">Yes</button>
+              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[fTobacco(),this.userData.controls['tobacouse'].setValue(false)]">No</button>
             </div>
           </div>
           <div class="w-100" *ngIf="steps==9">
+            <label for="" class="display-4 text-center fw-bold">What is your partner's gender?</label>
+            <div class="row mt-5">
+              <button class="px-5 py-3  w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[ this.userData.controls['p_gender'].setValue('male'),steps=10]">Male</button>
+              <button class="px-5 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_gender'].setValue('female') ,steps=10]">Female</button>
+            </div>
+          </div>
+          <div class="w-100" *ngIf="steps==10">
+            <label for="" class="display-4 text-center fw-bold">What is your partner's date of birth?</label>
+            <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input type="date" matInput formControlName="p_DOB">
+                  </mat-form-field>
+                  <div *ngIf="continueStatus && LifeInsurance.p_DOB.errors">
+                    <mat-error *ngIf="LifeInsurance.p_DOB.errors.required">Date of Birth requried</mat-error>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="m-5">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
+                    (click)="userData.controls['p_DOB'].invalid ? [retrun, continueStatus=true]: [steps=11,continueStatus=false]">Continue</button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="w-100" *ngIf="steps==11">
+            <label for="" class="display-4 text-center fw-bold">What is your partner's highest level of education
+              completed?</label>
+            <div class="row mt-5">
+              <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_education'].setValue('No Matrix'),steps=12]">No
+                Matrix</button>
+              <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_education'].setValue('Matrix'),steps=12]">Matrix</button>
+              <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_education'].setValue('3 Year diploma'),steps=12]">3
+                Year diploma</button>
+              <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_education'].setValue('3 year degree/4 year diploma'),steps=12]">3
+                year degree/4 year diploma</button>
+              <button class="px-5 m-3 py-3 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[this.userData.controls['p_education'].setValue('4 Year degree'),steps=12]">4
+                Year degree</button>
+            </div>
+          </div>
+          <div class="w-100" *ngIf="steps==12">
+            <label for="" class="display-4 text-center fw-bold">What do you partner's do for a living?</label>
+            <p class="text-center mt-3">Select an occupation that matches what you currently do for a living. If you
+              don't
+              find an exact match, select the closest match.</p>
+            <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Job</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" name="" formControlName="p_job" matInput>
+                      <mat-option>Select Job</mat-option>
+                      <mat-option *ngFor="let occupation of occupations" [value]="occupation">
+                        {{occupation}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="continueStatus && LifeInsurance.p_job.errors">
+                    <mat-error *ngIf="LifeInsurance.p_job.errors.required">Job requried</mat-error>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="m-5">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
+                    (click)="this.userData.controls['p_job'].invalid ? [retrun,continueStatus=true] : [steps=13,continueStatus=false] ">Continue</button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="w-100" *ngIf="steps==13">
+            <label for="" class="display-4 text-center fw-bold">What is your partner's monthly income before tax
+              and
+              deductions?</label>
+            <p class="text-center">We require standard information to assess your risk levels. It's important to give
+              this information so that you can be sufficiently and accurately covered.</p>
+            <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Amount</mat-label>
+                    <span matPrefix>R &nbsp;</span>
+                    <input type="text" matInput formControlName="p_income" [value]="">
+                  </mat-form-field>
+                  <div *ngIf="continueStatus && LifeInsurance.p_income.errors">
+                    <mat-error *ngIf="LifeInsurance.p_income.errors.required">Income is requried</mat-error>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="m-5">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-danger mt-3 px-5 rounded-pill"
+                    (click)="userData.controls['p_income'].invalid ? [retrun,continueStatus=true] : [steps=14,continueStatus=false] ">Continue</button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="w-100" *ngIf="steps==14">
+            <label for="" class="display-4 text-center fw-bold">Did you partner's smoke tobacco in the last 6
+              months?</label>
+            <p class="text-center mt-3">Tobacco use is defined as the use of tobacco or nicotine products in the form of
+              cigarettes, cigars, pipes, snuff, chewing tobacco, e-cigarettes, vaping devices, hubbly bubbly and the
+              like, within the last 6 months</p>
+            <div class="row mt-5">
+              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[fTobacco(), this.userData.controls['p_tobacouse'].setValue(true)]">Yes</button>
+              <button class="px-5 w-100 btn btn-light rounded-pill col fw-bolder"
+                (click)="[fTobacco(), this.userData.controls['p_tobacouse'].setValue(false)]">No</button>
+            </div>
+          </div>
+          <div class="w-100" *ngIf="steps==15">
             <label for="" class="display-4 text-center fw-bold">You're almost there</label>
             <p class="text-center">Just a few more steps to go</p>
             <div class="text-center">
@@ -213,10 +325,9 @@
         </form>
         <div class="text-center mt-4">
           <a href="#" class="link-dark" *ngIf="steps ==1">Cancel</a>
-          <a href="#" class="link-dark" *ngIf="steps !=1" (click)="back()">Back</a>
+          <a href="#" class="link-dark" *ngIf="steps !=1" (click)="steps=steps-1">Back</a>
         </div>
       </div>
     </div>
-
   </div>
 </div>

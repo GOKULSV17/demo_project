@@ -1,31 +1,15 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  Input,
-  EventEmitter,
-  Inject
-} from '@angular/core';
-import {
-  CoverDataService
-} from '../services/cover-data.service'
-import {
-  MatDialog,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog'
-import {
-  min
-} from 'moment';
-import {
-  FormArray,
-  FormBuilder
-} from '@angular/forms';
+import { Component, OnInit, Output, Input, EventEmitter, Inject } from '@angular/core';
+import { CoverDataService } from '../services/cover-data.service'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { FormArray, FormBuilder } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
   styleUrls: ['./quote.component.css']
 })
 export class QuoteComponent implements OnInit {
+  quote:boolean=false;
   lifeCover: boolean = false;
   disabilityCover: boolean = false;
   incomeProtectionCover: boolean = false;
@@ -36,7 +20,7 @@ export class QuoteComponent implements OnInit {
   p_criticalIllnessCover: boolean = false;
   public coverArraySelf: any = {}
   public coverArrayPartner: any = {}
- public coverValue: any = ''
+  public coverValue: any = ''
   autoTicks = false;
   disabled = false;
   invert = false;
@@ -73,8 +57,11 @@ export class QuoteComponent implements OnInit {
 
   tickInterval = 1;
   totalValue: any;
-  constructor(private coverDataS: CoverDataService, private dialog: MatDialog) {}
-
+  constructor(private coverDataS: CoverDataService, private dialog: MatDialog, private stepper: MatStepper) { }
+/**
+ * get the selected cover data from the previse stepper
+ * find the pressence of the each cover
+ */
   ngOnInit(): void {
     this.coverArraySelf.length
     this.coverArrayPartner.length
@@ -84,7 +71,7 @@ export class QuoteComponent implements OnInit {
       for (let i = 0; i < this.coverArraySelf.length; i++) {
         if (this.coverArraySelf[i] === 'LifeCover') {
           this.lifeCover = true;
-          this.lifeCoverValue=10000;
+          this.lifeCoverValue = 10000;
         } else if (this.coverArraySelf[i] === 'DisabilityCover') {
           this.disabilityCover = true;
           this.disabilityCovervalue = 30000;
@@ -96,7 +83,6 @@ export class QuoteComponent implements OnInit {
           this.criticalIllnessCoverValue = 50000;
         }
       }
-
     })
     this.coverDataS.coverArrayPartner.subscribe(data => {
       this.coverArrayPartner = data
@@ -104,7 +90,7 @@ export class QuoteComponent implements OnInit {
       for (let i = 0; i < this.coverArrayPartner.length; i++) {
         if (this.coverArrayPartner[i] === 'LifeCover') {
           this.p_lifeCover = true;
-          this.p_lifeCoverValue=10000;
+          this.p_lifeCoverValue = 10000;
         } else if (this.coverArrayPartner[i] === 'DisabilityCover') {
           this.p_disabilityCover = true;
           this.p_disabilityCovervalue = 30000;
@@ -116,15 +102,15 @@ export class QuoteComponent implements OnInit {
           this.p_criticalIllnessCoverValue = 50000;
         }
       }
-   
     })
     this.coverDataS.coverData.subscribe(data => {
       this.coverValue = data;
       console.log(data)
     })
-    this.Remove(event)
   }
-
+/**
+ * a popup section that containg the adition of cover value to add new one
+ */
   addCover() {
     const dialogRef = this.dialog.open(AddSectionComponent, {
       data: {
@@ -140,56 +126,72 @@ export class QuoteComponent implements OnInit {
       }
     });
   }
+  /**
+   * performing the controler manager
+   * @returns valu to intervel betwee the slider controler
+   */
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {
       return this.autoTicks ? 'auto' : this.tickInterval;
     }
     return 0;
   }
-
-  public Remove(event:any){
+/**
+ * remove the cover seection
+ * @param event get the values to remove the section
+ */
+  public Remove(event: any) {
     console.log(event)
-    if(this.coverValue!='both'){
-    const index: number = this.coverArraySelf.indexOf(event);
-    console.log(this.coverArraySelf.length)
-    if (index !== -1) {
+    if (this.coverValue != 'both') {
+      const index: number = this.coverArraySelf.indexOf(event);
+      console.log(this.coverArraySelf.length)
+      if (index !== -1) {
         this.coverArraySelf.splice(index, 1);
         console.log(this.coverArraySelf)
-    }  
-  }else{
-    const index: number = this.coverArrayPartner.indexOf(event);
-    console.log(this.coverArrayPartner.length)
-    if (index !== -1) {
+      }
+    } else {
+      const index: number = this.coverArrayPartner.indexOf(event);
+      console.log(this.coverArrayPartner.length)
+      if (index !== -1) {
         this.coverArrayPartner.splice(index, 1);
         console.log(this.coverArrayPartner)
-    }  
+      }
+    }
   }
-  }
-
-  public Add(event:any){
+/**
+ * to add the cover section  
+ * @param event get the data to add the cover value to the section
+ */
+  public Add(event: any) {
     console.log(event)
-    if(this.coverValue!='both'){
-    const index: number = this.coverArraySelf.indexOf(event);
-    console.log(this.coverArraySelf.length)
-    if (index !== -1) {
+    if (this.coverValue != 'both') {
+      const index: number = this.coverArraySelf.indexOf(event);
+      console.log(this.coverArraySelf.length)
+      if (index !== -1) {
         this.coverArraySelf.push(index, 1);
         console.log(this.coverArraySelf)
-    }  
-  }else{
-    const index: number = this.coverArrayPartner.indexOf(event);
-    console.log(this.coverArrayPartner.length)
-    if (index !== -1) {
+      }
+    } else {
+      const index: number = this.coverArrayPartner.indexOf(event);
+      console.log(this.coverArrayPartner.length)
+      if (index !== -1) {
         this.coverArrayPartner.push(index, 1);
         console.log(this.coverArrayPartner)
-    }  
+      }
+    }
   }
-  }
-
+  /**
+   * send the stepper compleat status  
+   */
   nextSection() {
-    console.log(this.coverArraySelf)
-    console.log(this.totalValue)
+    this.coverDataS.quoteStatus(this.quote=true)
   }
-
+  /**
+   * go to the previious stepper section
+   */
+  goBack(){
+    this.stepper.previous();
+}
 }
 
 
@@ -197,6 +199,10 @@ export class QuoteComponent implements OnInit {
   selector: 'add-section',
   templateUrl: './add-section.component.html'
 })
+/**
+ * the popup exicute section
+ * resive the values of the data which are not in the seleced cover 
+ */
 export class AddSectionComponent {
   lifeCover: boolean = false;
   disabilityCover: boolean = false;
@@ -207,18 +213,20 @@ export class AddSectionComponent {
   p_incomeProtectionCover: boolean = false;
   p_criticalIllnessCover: boolean = false;
   coverValue: any = ''
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) {
+/**
+ * to display the popup section 
+ * @param data get the data of the unselected cover 
+ */
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.lifeCover = data.LC
     this.disabilityCover = data.DC
     this.incomeProtectionCover = data.IPC
     this.criticalIllnessCover = data.CIC
-
     this.p_lifeCover = data.p_LC
     this.p_disabilityCover = data.p_DC
     this.p_incomeProtectionCover = data.p_IPC
     this.p_criticalIllnessCover = data.p_CIC
     this.coverValue = data.C_value
-    console.log(this.p_criticalIllnessCover, this.p_disabilityCover, this.p_incomeProtectionCover, this.p_lifeCover)
   }
+
 }
