@@ -193,7 +193,7 @@
                 (click)="[fTobacco(),this.userData.controls['tobacouse'].setValue(false)]">No</button>
             </div>
           </div>
-          <div class="w-100" *ngIf="steps==9">
+          <div class="w-100" *ngIf="steps==9 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">What is your partner's gender?</label>
             <div class="row mt-5">
               <button class="px-5 py-3  w-100 btn btn-light rounded-pill col fw-bolder"
@@ -202,7 +202,7 @@
                 (click)="[this.userData.controls['p_gender'].setValue('female') ,steps=10]">Female</button>
             </div>
           </div>
-          <div class="w-100" *ngIf="steps==10">
+          <div class="w-100" *ngIf="steps==10 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">What is your partner's date of birth?</label>
             <mat-card>
               <mat-card-content>
@@ -224,7 +224,7 @@
               </mat-card-actions>
             </mat-card>
           </div>
-          <div class="w-100" *ngIf="steps==11">
+          <div class="w-100" *ngIf="steps==11 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">What is your partner's highest level of education
               completed?</label>
             <div class="row mt-5">
@@ -244,7 +244,7 @@
                 Year degree</button>
             </div>
           </div>
-          <div class="w-100" *ngIf="steps==12">
+          <div class="w-100" *ngIf="steps==12 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">What do you partner's do for a living?</label>
             <p class="text-center mt-3">Select an occupation that matches what you currently do for a living. If you
               don't
@@ -274,7 +274,7 @@
               </mat-card-actions>
             </mat-card>
           </div>
-          <div class="w-100" *ngIf="steps==13">
+          <div class="w-100" *ngIf="steps==13 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">What is your partner's monthly income before tax
               and
               deductions?</label>
@@ -301,7 +301,7 @@
               </mat-card-actions>
             </mat-card>
           </div>
-          <div class="w-100" *ngIf="steps==14">
+          <div class="w-100" *ngIf="steps==14 && userData.controls['cover'].value == 'both'">
             <label for="" class="display-4 text-center fw-bold">Did you partner's smoke tobacco in the last 6
               months?</label>
             <p class="text-center mt-3">Tobacco use is defined as the use of tobacco or nicotine products in the form of
@@ -325,7 +325,7 @@
         </form>
         <div class="text-center mt-4">
           <a href="#" class="link-dark" *ngIf="steps ==1">Cancel</a>
-          <a href="#" class="link-dark" *ngIf="steps !=1" (click)="steps=steps-1">Back</a>
+          <a href="#" class="link-dark" *ngIf="steps !=1" (click)="userData.controls['cover'].value == 'both'?steps=steps-1:(steps>=9?[steps=9,steps=steps-1]:steps=steps-1)">Back</a>
         </div>
       </div>
     </div>
